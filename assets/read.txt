@@ -1,0 +1,8 @@
+assets파일은 따로 생성한 것으로
+pubspec.yaml 파일 안에 아래 섹션에
+# The following section is specific to Flutter packages.
+flutter:
+
+  assets:
+    - assets/
+을 추가합니다. - assets/ 을 통해 assets 파일 안에 모든 것들은 사용하겠다는 의미이다.
