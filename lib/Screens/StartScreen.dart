@@ -274,7 +274,7 @@ class _StartScreenState extends State<StartScreen> {
   Future<List<Carpool>> fetchCarpoolDataByDate() async {
     var token = await getToken();
     final response = await http.get(
-      Uri.parse('http://172.29.65.121:8080/main'),
+      Uri.parse("${dotenv.env['API_URL']}:8080/main"),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
       },
@@ -310,7 +310,7 @@ class _StartScreenState extends State<StartScreen> {
     var token = await getToken();
     final response = await http.get(
       Uri.parse(
-          'http://172.29.65.121:8080/user/getStatus'), // 사용자 상태를 가져오는 API endpoint
+          "${dotenv.env['API_URL']}:8080/user/getStatus"), // 사용자 상태를 가져오는 API endpoint
       headers: <String, String>{
         'Authorization': 'Bearer $token',
       },
