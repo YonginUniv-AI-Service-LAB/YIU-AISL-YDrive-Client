@@ -31,7 +31,7 @@ class _StartScreenState extends State<StartScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffB9BADA),
+          backgroundColor: Color(0xffE6E1EF),
           leading: IconButton(
             onPressed: () {},
             icon: Icon(
@@ -80,36 +80,52 @@ class _StartScreenState extends State<StartScreen> {
                 padding: EdgeInsets.only(left: 10),
                 child: Row(
                   children: [
-                    TextButton(
+                    Container(
+                      width: 120,
+                      margin: EdgeInsets.only(right: 10, top: 10),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: selectedButton == '등록순' ? Color(0xFF9EA1CA) : Color(0xFF),
+                          side: BorderSide(width: 1.0, color: Color(0xFF9EA1CA)),
+                        ),
+                        child: Text(
+                          '등록순',
+                          style: TextStyle(
+                            color: Color(0xFF000000),
+                            fontSize: 15,
+                          ),
+                        ),
                         onPressed: () {
                           setState(() {
                             futureCarpoolData = fetchCarpoolDataByTime();
                             selectedButton = '등록순';
                           });
                         },
-                        child: DefaultTextStyle(
+                      ),
+                    ),
+                    Container(
+                      width: 120,
+                      margin: EdgeInsets.only(right: 10, top: 10),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: selectedButton == '출발시간순' ? Color(0xFF9EA1CA) : Color(0xFF),
+                          side: BorderSide(width: 1.0, color: Color(0xFF9EA1CA)),
+                        ),
+                        child: Text(
+                          '출발시간순',
                           style: TextStyle(
-                              fontSize: 20,
-                              color: selectedButton == '등록순'
-                                  ? Color(0xFF000000)
-                                  : Color(0xFF000000)),
-                          child: Text('등록순'),
-                        )),
-                    TextButton(
+                            color: Color(0xFF000000),
+                            fontSize: 15,
+                          ),
+                        ),
                         onPressed: () {
                           setState(() {
                             futureCarpoolData = fetchCarpoolDataByDate();
                             selectedButton = '출발시간순';
                           });
                         },
-                        child: DefaultTextStyle(
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: selectedButton == '출발시간순'
-                                  ? Color(0xFF000000)
-                                  : Color(0xFF000000)),
-                          child: Text('출발시간순'),
-                        ))
+                      ),
+                    ),
                   ],
                 ),
               ),

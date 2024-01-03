@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'YDRIVE',
       debugShowCheckedModeBanner: false,
-      home: new MyPageScreen(),
+      home: new MainScreen(),
     ); //MaterialApp
   }
 }

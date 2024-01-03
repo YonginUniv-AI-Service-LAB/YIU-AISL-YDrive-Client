@@ -104,11 +104,6 @@ class _MyPageScreenState extends State<MyPageScreen> {
                           DefaultTextStyle(
                             style: TextStyle(
                                 fontSize: 17, color: Color(0xFF000000)),
-                            child: Text('학번'),
-                          ),
-                          DefaultTextStyle(
-                            style: TextStyle(
-                                fontSize: 17, color: Color(0xFF000000)),
                             child: Text('지역'),
                           ),
                           DefaultTextStyle(
@@ -125,17 +120,12 @@ class _MyPageScreenState extends State<MyPageScreen> {
                           DefaultTextStyle(
                               style: TextStyle(
                                   fontSize: 17, color: Color(0xFF000000)),
-                              child: Text('이름') //Text(nameController.text),
+                              child: Text(nameController.text)
                               ),
                           DefaultTextStyle(
                             style: TextStyle(
                                 fontSize: 17, color: Color(0xFF000000)),
                             child: Text(phoneController.text),
-                          ),
-                          DefaultTextStyle(
-                            style: TextStyle(
-                                fontSize: 17, color: Color(0xFF000000)),
-                            child: Text('학번 입력 관련된 부분 수정해주세요'),
                           ),
                           DefaultTextStyle(
                             style: TextStyle(
