@@ -1,6 +1,7 @@
 import 'package:aisl_carpool_front/Screens/ModifydataScreen.dart';
 import 'package:aisl_carpool_front/Screens/StartScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -381,7 +382,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
   void fetchProfile() async {
     var token = await getToken();
     final response = await http.get(
-      Uri.parse('http://172.29.65.121:8080/myprofile'),
+      Uri.parse("${dotenv.env['API_URL']}:8080/myprofile"),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
       },

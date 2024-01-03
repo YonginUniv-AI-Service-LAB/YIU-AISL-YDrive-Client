@@ -2,6 +2,7 @@ import 'package:aisl_carpool_front/Screens/CarpoolScreen.dart';
 import 'package:aisl_carpool_front/Screens/MyPageScreen.dart';
 import 'package:aisl_carpool_front/Screens/PostDetailScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -253,7 +254,7 @@ class _StartScreenState extends State<StartScreen> {
   Future<List<Carpool>> fetchCarpoolDataByTime() async {
     var token = await getToken();
     final response = await http.get(
-      Uri.parse('http://172.29.65.121:8080/main'),
+      Uri.parse("${dotenv.env['API_URL']}:8080/main"),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
       },

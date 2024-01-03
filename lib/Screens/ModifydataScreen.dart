@@ -2,6 +2,7 @@ import 'package:aisl_carpool_front/Screens/MyPageScreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -188,7 +189,7 @@ class _ModifydataScreenState extends State<ModifydataScreen> {
   void profileUpdate(String name, String phone, String home, String carNum,
       BuildContext context) async {
     var token = await getToken();
-    var url = Uri.parse('http://172.29.65.121:8080/myprofile/update');
+    var url = Uri.parse("${dotenv.env['API_URL']}:8080/myprofile/update");
     var response = await http.put(
       url,
       headers: <String, String>{
@@ -212,7 +213,7 @@ class _ModifydataScreenState extends State<ModifydataScreen> {
   void fetchProfile() async {
     var token = await getToken();
     final response = await http.get(
-      Uri.parse('http://172.29.65.121:8080/myprofile'),
+      Uri.parse("${dotenv.env['API_URL']}:8080/myprofile"),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
       },

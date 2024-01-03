@@ -4,6 +4,7 @@ import 'package:aisl_carpool_front/Data/Carpool.dart';
 import 'package:aisl_carpool_front/Screens/MyPageScreen.dart';
 import 'package:aisl_carpool_front/Screens/StartScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -248,7 +249,7 @@ class PostDetailScreen extends StatelessWidget {
   Future<void> applyCarpool(
       BuildContext context, int carpoolNum, String email) async {
     final String token = await getToken();
-    final String url = 'http://172.29.65.121:8080/carpool/apply/${carpoolNum}';
+    final String url = "${dotenv.env['API_URL']}:8080/carpool/apply/${carpoolNum}";
     final response = await http.post(
       Uri.parse(url),
       headers: {

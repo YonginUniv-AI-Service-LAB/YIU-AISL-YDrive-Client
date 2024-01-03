@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 import 'LoginScreen.dart';
@@ -496,7 +497,7 @@ class _JoinScreenState extends State<JoinScreen> {
         !_homeValidate &&
         !_pwdValidate &&
         !_carNumValidate) {
-      var url = Uri.parse('http://172.29.65.121:8080/join');
+      var url = Uri.parse("${dotenv.env['API_URL']}:8080/join");
       var response = await http.post(
         url,
         headers: <String, String>{
@@ -550,7 +551,7 @@ class _JoinScreenState extends State<JoinScreen> {
   }
 
   Future<void> emailCheck(String email) async {
-    var url = Uri.parse('http://172.29.65.121:8080/join/emailCheck'); // Android
+    var url = Uri.parse("${dotenv.env['API_URL']}:8080/join/emailCheck"); // Android
     var response = await http.post(
       url,
       headers: <String, String>{
@@ -580,7 +581,7 @@ class _JoinScreenState extends State<JoinScreen> {
   }
 
   Future<void> emailCodeCheck(String authNum) async {
-    var url = Uri.parse('http://172.29.65.121:8080/join/emailCheckTrue');
+    var url = Uri.parse("${dotenv.env['API_URL']}:8080/join/emailCheckTrue");
     var response = await http.post(
       url,
       headers: <String, String>{
