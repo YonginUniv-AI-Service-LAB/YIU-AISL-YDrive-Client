@@ -3,6 +3,7 @@ import 'package:aisl_carpool_front/Screens/FindpwdScreen.dart';
 import 'package:aisl_carpool_front/Screens/JoinScreen.dart';
 import 'package:aisl_carpool_front/Screens/StartScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
@@ -151,7 +152,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   void login(String email, String pwd, BuildContext context) async {
-    var url = Uri.parse('http://192.168.42.84:8080/login');
+    var url = Uri.parse("${dotenv.env['API_URL']}:8080/login");
     var response = await http.post(
       url,
       headers: <String, String>{
