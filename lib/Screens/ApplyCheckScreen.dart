@@ -97,7 +97,7 @@ class ApplyCheckScreen1 extends StatelessWidget {
                                 child: DefaultTextStyle(
                                     style: TextStyle(
                                         fontSize: 13, color: Color(0xFF000000)),
-                                    child: Text('신논현역 3번')),
+                                    child: Text('신논현역')),
                               ),
                             ],
                           ),
@@ -129,8 +129,8 @@ class ApplyCheckScreen1 extends StatelessWidget {
                                 margin: EdgeInsets.only(top: 3, left: 10),
                                 child: DefaultTextStyle(
                                     style: TextStyle(
-                                        fontSize: 17, color: Color(0xFF000000)),
-                                    child: Text('용인대학교')),
+                                        fontSize: 13, color: Color(0xFF000000)),
+                                    child: Text('용인대')),
                               ),
                             ],
                           ),
@@ -260,45 +260,330 @@ class ApplyCheckScreen1 extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.only(right: 100),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            padding:
-                                                EdgeInsets.only(bottom: 10),
-                                            child: DefaultTextStyle(
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  color: Color(0xFF9EA1CA)),
-                                              child: Text('이름'),
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.only(right: 25),
-                                            child: DefaultTextStyle(
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  color: Color(0xFF9EA1CA)),
-                                              child: Text('정*기'),
-                                            ),
-                                          )
-                                        ],
+                                      margin: EdgeInsets.only(
+                                        bottom: 10,
                                       ),
+                                      child: DefaultTextStyle(
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              color: Color(0xFF000000)),
+                                          child: Text(
+                                              '정*기') //Text(nameController.text),
+                                          ),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.only(bottom: 10),
-                                      child: DefaultTextStyle(
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            color: Color(0xFF9EA1CA)),
-                                        child: Text('이용내역'),
+                                      margin: EdgeInsets.only(
+                                        bottom: 10,
                                       ),
+                                      child: DefaultTextStyle(
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              color: Color(0xFF000000)),
+                                          child: Text(
+                                              '최근 이용 내역') //Text(nameController.text),
+                                          ),
                                     ),
                                     Row(
-                                      children: [Column()],
-                                    ),
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    height: 23,
+                                                    width: 60,
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 10),
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color:
+                                                            Color(0xFF9EA1CA)),
+                                                    child: DefaultTextStyle(
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: Color(
+                                                                0xFF000000)),
+                                                        child: Text('출발')),
+                                                  ),
+                                                  Container(
+                                                    width: 100,
+                                                    margin: EdgeInsets.only(
+                                                        top: 3, left: 10),
+                                                    child: DefaultTextStyle(
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: Color(
+                                                                0xFF000000)),
+                                                        child: Text(
+                                                            '아시아드경기장(공촌사거리)')),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    height: 23,
+                                                    width: 60,
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 10),
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color:
+                                                            Color(0xFF9EA1CA)),
+                                                    child: DefaultTextStyle(
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: Color(
+                                                                0xFF000000)),
+                                                        child: Text('출발')),
+                                                  ),
+                                                  Container(
+                                                    width: 100,
+                                                    margin: EdgeInsets.only(
+                                                        top: 3, left: 10),
+                                                    child: DefaultTextStyle(
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: Color(
+                                                                0xFF000000)),
+                                                        child: Text('신논현역')),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    height: 23,
+                                                    width: 60,
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 10),
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color:
+                                                            Color(0xFF9EA1CA)),
+                                                    child: DefaultTextStyle(
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: Color(
+                                                                0xFF000000)),
+                                                        child: Text('출발')),
+                                                  ),
+                                                  Container(
+                                                    width: 100,
+                                                    margin: EdgeInsets.only(
+                                                        top: 3, left: 10),
+                                                    child: DefaultTextStyle(
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: Color(
+                                                                0xFF000000)),
+                                                        child: Text('용인대')),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    height: 23,
+                                                    width: 60,
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 10),
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color:
+                                                            Color(0xFF9EA1CA)),
+                                                    child: DefaultTextStyle(
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: Color(
+                                                                0xFF000000)),
+                                                        child: Text('출발')),
+                                                  ),
+                                                  Container(
+                                                    width: 100,
+                                                    margin: EdgeInsets.only(
+                                                        top: 3, left: 10),
+                                                    child: DefaultTextStyle(
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: Color(
+                                                                0xFF000000)),
+                                                        child: Text('용인대')),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                            child: Column(
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  height: 23,
+                                                  width: 60,
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 10),
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      color: Color(0xFF9EA1CA)),
+                                                  child: DefaultTextStyle(
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          color: Color(
+                                                              0xFF000000)),
+                                                      child: Text('도착')),
+                                                ),
+                                                Container(
+                                                  width: 100,
+                                                  margin: EdgeInsets.only(
+                                                      top: 3, left: 10),
+                                                  child: DefaultTextStyle(
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          color: Color(
+                                                              0xFF000000)),
+                                                      child: Text('용인대')),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  height: 23,
+                                                  width: 60,
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 10),
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      color: Color(0xFF9EA1CA)),
+                                                  child: DefaultTextStyle(
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          color: Color(
+                                                              0xFF000000)),
+                                                      child: Text('도착')),
+                                                ),
+                                                Container(
+                                                  width: 100,
+                                                  margin: EdgeInsets.only(
+                                                      top: 3, left: 10),
+                                                  child: DefaultTextStyle(
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          color: Color(
+                                                              0xFF000000)),
+                                                      child: Text('용인대')),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  height: 23,
+                                                  width: 60,
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 10),
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      color: Color(0xFF9EA1CA)),
+                                                  child: DefaultTextStyle(
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          color: Color(
+                                                              0xFF000000)),
+                                                      child: Text('도착')),
+                                                ),
+                                                Container(
+                                                  width: 100,
+                                                  margin: EdgeInsets.only(
+                                                      top: 3, left: 10),
+                                                  child: DefaultTextStyle(
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          color: Color(
+                                                              0xFF000000)),
+                                                      child: Text(
+                                                          '아시아드경기장(공촌사거리)')),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  height: 23,
+                                                  width: 60,
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 10),
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      color: Color(0xFF9EA1CA)),
+                                                  child: DefaultTextStyle(
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          color: Color(
+                                                              0xFF000000)),
+                                                      child: Text('도착')),
+                                                ),
+                                                Container(
+                                                  width: 100,
+                                                  margin: EdgeInsets.only(
+                                                      top: 3, left: 10),
+                                                  child: DefaultTextStyle(
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          color: Color(
+                                                              0xFF000000)),
+                                                      child: Text('용인대')),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ))
+                                      ],
+                                    )
                                   ],
                                 )),
                           )),

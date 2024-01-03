@@ -65,11 +65,6 @@ class _JoinScreenState extends State<JoinScreen> {
             body: SingleChildScrollView(
               child: Container(
                 color: Colors.white,
-                // `decoration: BoxDecoration(
-                //     gradient: LinearGradient(
-                //         begin: Alignment.topCenter,
-                //         end: Alignment.bottomCenter,
-                //         colors: [Color(0xffB9BADA), Colors.white])),`
                 child: Column(
                   children: [
                     Container(

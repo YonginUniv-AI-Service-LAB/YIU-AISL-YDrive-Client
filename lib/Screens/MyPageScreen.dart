@@ -222,7 +222,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                       margin: EdgeInsets.only(left: 10),
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          backgroundColor: Color(0xFF9EA1CA),
+                          backgroundColor: Color(0xFF),
                           side:
                               BorderSide(width: 1.0, color: Color(0xFF9EA1CA)),
                         ),
@@ -239,13 +239,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
               ),
               Expanded(
                 child: ListView.builder(
-                  padding: EdgeInsets.only(top: 10, left: 15, right: 15),
                   itemCount: 5,
                   itemBuilder: (BuildContext ctx, int idx) {
                     return Padding(
                       padding: EdgeInsets.only(bottom: 10),
                       child: Container(
-                          padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               border: Border.all(
                                 color: Color(0xFF9EA1CA),
