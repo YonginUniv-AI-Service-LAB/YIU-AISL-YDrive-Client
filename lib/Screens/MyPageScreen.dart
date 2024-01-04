@@ -30,7 +30,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffB9BADA),
+          backgroundColor: Color(0xffE6E1EF),
           leading: IconButton(
             onPressed: () {},
             icon: Icon(
@@ -120,8 +120,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                           DefaultTextStyle(
                               style: TextStyle(
                                   fontSize: 17, color: Color(0xFF000000)),
-                              child: Text(nameController.text)
-                              ),
+                              child: Text(nameController.text)),
                           DefaultTextStyle(
                             style: TextStyle(
                                 fontSize: 17, color: Color(0xFF000000)),

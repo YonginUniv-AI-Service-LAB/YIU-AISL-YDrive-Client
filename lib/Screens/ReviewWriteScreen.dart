@@ -9,7 +9,7 @@ class ReviewWriteScreen extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffB9BADA),
+          backgroundColor: Color(0xffE6E1EF),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -10,17 +10,12 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:Container(
+      home: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xffB9BADA),
-                  Colors.white
-                ]
-            )
-        ),
+                colors: [Color(0xffE6E1EF), Colors.white])),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -29,17 +24,17 @@ class MainScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/titleLogo.png', width: 100, scale: 1.3, ),
-                  DefaultTextStyle(style: TextStyle(
-                      fontSize: 40,
-                      color: Color(0xffC1BDDA)
-                  ), child: Text('Y')
+                  Image.asset(
+                    'assets/titleLogo.png',
+                    width: 100,
+                    scale: 1.3,
                   ),
-                  DefaultTextStyle(style: TextStyle(
-                      fontSize: 40,
-                      color: Color(0xffFFFFFF)
-                  ), child: Text('DRIVE')
-                  )
+                  DefaultTextStyle(
+                      style: TextStyle(fontSize: 40, color: Color(0xffC1BDDA)),
+                      child: Text('Y')),
+                  DefaultTextStyle(
+                      style: TextStyle(fontSize: 40, color: Color(0xffFFFFFF)),
+                      child: Text('DRIVE'))
                 ],
               ),
             ),
@@ -49,35 +44,37 @@ class MainScreen extends StatelessWidget {
                   width: 300,
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(width: 1.0, color: Color(0xffC1BDDA) ),
+                      backgroundColor: Color(0xffC1BDDA),
+                      side: BorderSide(width: 1.0, color: Color(0xffC1BDDA)),
                     ),
-                    child: (
-                        Text('LOGIN')
-                    ), onPressed:(){
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (BuildContext context) => LoginScreen()
-                      ),
-                    );
-                  },
+                    child: (DefaultTextStyle(
+                        style:
+                            TextStyle(fontSize: 15, color: Color(0xFF000000)),
+                        child: Text('LOGIN'))),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => LoginScreen()),
+                      );
+                    },
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    DefaultTextStyle(style: TextStyle(
-                        fontSize: 13,
-                        color: Color(0xffC1BDDA)
-                    ), child: Text('계정이 없나요?')
-                    ),
+                    DefaultTextStyle(
+                        style:
+                            TextStyle(fontSize: 13, color: Color(0xff000000)),
+                        child: Text('계정이 없나요?')),
                     TextButton(
-                      child: (
-                          Text('계정 생성하기')
-                      ),onPressed: (){
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (BuildContext context) => JoinScreen()
-                        ),
-                      );
-                    },)
+                      child: (Text('계정 생성하기')),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => JoinScreen()),
+                        );
+                      },
+                    )
                   ],
                 )
               ],
@@ -85,6 +82,6 @@ class MainScreen extends StatelessWidget {
           ],
         ),
       ),
-    );  //MaterialApp
+    ); //MaterialApp
   }
 }

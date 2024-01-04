@@ -41,7 +41,7 @@ class _JoinScreenState extends State<JoinScreen> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
-              backgroundColor: Color(0xffB9BADA),
+              backgroundColor: Color(0xffE6E1EF),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -551,7 +551,8 @@ class _JoinScreenState extends State<JoinScreen> {
   }
 
   Future<void> emailCheck(String email) async {
-    var url = Uri.parse("${dotenv.env['API_URL']}:8080/join/emailCheck"); // Android
+    var url =
+        Uri.parse("${dotenv.env['API_URL']}:8080/join/emailCheck"); // Android
     var response = await http.post(
       url,
       headers: <String, String>{

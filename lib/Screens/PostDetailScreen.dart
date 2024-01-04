@@ -21,7 +21,7 @@ class PostDetailScreen extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffB9BADA),
+          backgroundColor: Color(0xffE6E1EF),
           title: Container(
             padding: EdgeInsets.only(left: 50),
             child: Row(
@@ -249,7 +249,8 @@ class PostDetailScreen extends StatelessWidget {
   Future<void> applyCarpool(
       BuildContext context, int carpoolNum, String email) async {
     final String token = await getToken();
-    final String url = "${dotenv.env['API_URL']}:8080/carpool/apply/${carpoolNum}";
+    final String url =
+        "${dotenv.env['API_URL']}:8080/carpool/apply/${carpoolNum}";
     final response = await http.post(
       Uri.parse(url),
       headers: {

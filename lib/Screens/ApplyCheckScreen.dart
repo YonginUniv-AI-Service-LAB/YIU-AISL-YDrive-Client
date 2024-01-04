@@ -11,7 +11,7 @@ class ApplyCheckScreen1 extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffB9BADA),
+          backgroundColor: Color(0xffE6E1EF),
           title: Container(
             padding: EdgeInsets.only(left: 50),
             child: Row(

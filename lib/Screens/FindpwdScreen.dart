@@ -41,7 +41,7 @@ class _FindpwdScreenState extends State<FindpwdScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffB9BADA),
+          backgroundColor: Color(0xffE6E1EF),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -327,7 +327,8 @@ class _FindpwdScreenState extends State<FindpwdScreen> {
   }
 
   Future<void> emailCheck(String email) async {
-    var url = Uri.parse("${dotenv.env['API_URL']}:8080/join/emailCheck"); // Android
+    var url =
+        Uri.parse("${dotenv.env['API_URL']}:8080/join/emailCheck"); // Android
     var response = await http.post(
       url,
       headers: <String, String>{

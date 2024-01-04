@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffB9BADA),
+          backgroundColor: Color(0xffE6E1EF),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -168,7 +168,7 @@ class LoginScreen extends StatelessWidget {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => StartScreen()),
       );
-    } else if(response.statusCode == 400) {
+    } else if (response.statusCode == 400) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -186,7 +186,7 @@ class LoginScreen extends StatelessWidget {
           );
         },
       );
-    } else if(response.statusCode == 402) {
+    } else if (response.statusCode == 402) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -194,12 +194,15 @@ class LoginScreen extends StatelessWidget {
               title: Text('알림'),
               content: Text('회원가입을 하지 않은 사용자 입니다.'),
               actions: <Widget>[
-                TextButton(onPressed: () {Navigator.of(context).pop();}, child: Text('회원가입하러 가기'))
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('회원가입하러 가기'))
               ],
             );
-          }
-          );
-    } else if(response.statusCode == 401) {
+          });
+    } else if (response.statusCode == 401) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -207,11 +210,14 @@ class LoginScreen extends StatelessWidget {
               title: Text('알림'),
               content: Text('학번과 비밀번호가 일치하지 않습니다.'),
               actions: <Widget>[
-                TextButton(onPressed: () {Navigator.of(context).pop();}, child: Text('회원가입하러 가기'))
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('회원가입하러 가기'))
               ],
             );
-          }
-      );
+          });
     }
   }
 

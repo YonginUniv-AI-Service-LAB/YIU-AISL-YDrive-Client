@@ -10,7 +10,7 @@ class CheckDetailScreen_owner extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffB9BADA),
+          backgroundColor: Color(0xffE6E1EF),
           leading: IconButton(
             onPressed: () {},
             icon: Icon(
@@ -573,70 +573,68 @@ class CheckDetailScreen_owner extends StatelessWidget {
                               ),
                               borderRadius: BorderRadius.circular(10)),
                           child: Container(
-                            child: TextButton(
-                                onPressed: () {},
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
                                   children: [
-                                    Row(
-                                      children: [
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.star,
-                                            color: Color(0xFF9EA1CA),
-                                          ),
-                                          iconSize: 25,
-                                        ),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.star,
-                                            color: Color(0xFF9EA1CA),
-                                          ),
-                                          iconSize: 25,
-                                        ),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.star,
-                                            color: Color(0xFF9EA1CA),
-                                          ),
-                                          iconSize: 25,
-                                        ),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.star_border,
-                                            color: Color(0xFF9EA1CA),
-                                          ),
-                                          iconSize: 25,
-                                        ),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.star_border,
-                                            color: Color(0xFF9EA1CA),
-                                          ),
-                                          iconSize: 25,
-                                        )
-                                      ],
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.star,
+                                        color: Color(0xFF9EA1CA),
+                                      ),
+                                      iconSize: 25,
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        DefaultTextStyle(
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              color: Color(0xFF000000)),
-                                          child: Text(
-                                              '차주 텐션이 감당이 안되서 힘들었는데 심심하지\n 않게 간 것 같아 되돌아보니 조아욤 날짜'),
-                                        ),
-                                      ],
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.star,
+                                        color: Color(0xFF9EA1CA),
+                                      ),
+                                      iconSize: 25,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.star,
+                                        color: Color(0xFF9EA1CA),
+                                      ),
+                                      iconSize: 25,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.star_border,
+                                        color: Color(0xFF9EA1CA),
+                                      ),
+                                      iconSize: 25,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.star_border,
+                                        color: Color(0xFF9EA1CA),
+                                      ),
+                                      iconSize: 25,
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    DefaultTextStyle(
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          color: Color(0xFF000000)),
+                                      child: Text(
+                                          '차주 텐션이 감당이 안되서 힘들었는데 심심하지\n 않게 간 것 같아 되돌아보니 조아욤 날짜'),
                                     ),
                                   ],
-                                )),
+                                ),
+                              ],
+                            ),
                           )),
                     );
                   },
