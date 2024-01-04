@@ -1,4 +1,5 @@
 // 로그인 화면
+import 'package:aisl_carpool_front/Screens/CarpoolListScreen.dart';
 import 'package:aisl_carpool_front/Screens/FindpwdScreen.dart';
 import 'package:aisl_carpool_front/Screens/JoinScreen.dart';
 import 'package:aisl_carpool_front/Screens/StartScreen.dart';
@@ -166,7 +167,7 @@ class LoginScreen extends StatelessWidget {
       String token = tokenInfo['access_token'];
       setToken(token);
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => StartScreen()),
+        MaterialPageRoute(builder: (BuildContext context) => CarpoolListScreen()),
       );
     } else if (response.statusCode == 400) {
       showDialog(
