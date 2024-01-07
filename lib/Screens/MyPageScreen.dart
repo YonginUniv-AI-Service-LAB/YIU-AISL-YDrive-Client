@@ -17,12 +17,20 @@ class MyPageScreen extends StatefulWidget {
 
 class _MyPageScreenState extends State<MyPageScreen> {
   late Future<List<UseList>> futureUseListData;
+  Future<int>? futureStatus;
   String selectedButton = '차주';
 
   void initState() {
     super.initState();
     fetchProfile();
+    futureStatus = fetchUserStatus();
     futureUseListData = fetchOwnerList();
+  }
+
+  void refreshStatus() {
+    setState(() {
+      futureStatus = fetchUserStatus();
+    });
   }
 
   final nameController = TextEditingController();
@@ -179,7 +187,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                       side: BorderSide(width: 1.0, color: Color(0xFF9EA1CA)),
                     ),
                     child: FutureBuilder<int>(
-                      future: fetchUserStatus(), // fetchUserStatus 함수를 Future로 사용
+                      future: futureStatus, // fetchUserStatus 함수를 Future로 사용
                       builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                         // 데이터가 아직 준비되지 않았을 때
                         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -193,12 +201,13 @@ class _MyPageScreenState extends State<MyPageScreen> {
                       },
                     ),
                     onPressed: () async {
-                      int status = await fetchUserStatus();
+                      int status = await futureStatus!;
                       if (status == 1) {
                         await changeGuestMode();
                       } else {
                         await changeOwnerMode();
                       }
+                      refreshStatus();
                     },
                   ),
                 )
@@ -480,58 +489,62 @@ class _MyPageScreenState extends State<MyPageScreen> {
 
   Future<void> changeOwnerMode() async {
     var token = await getToken();
-    final response = await http.get(
+    final response = await http.put(
       Uri.parse("${dotenv.env['API_URL']}:8080/myprofile/ownerMode"),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
       },
     );
-
-    var jsonResponse = jsonDecode(response.body);
-    if (response.statusCode == 200) {
+    if(response.statusCode == 200) {
       showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('차주 모드 전환 완료'),
-            content: Text('차주 모드로 전환이 완료되었습니다.'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('확인'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('차주 모드 전환 완료'),
+              content: Text('차주 모드로 전환이 완료되었습니다.'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('확인'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          }
       );
     }
   }
 
   Future<void> changeGuestMode() async {
     var token = await getToken();
-    final response = await http.get(
+    final response = await http.put(
       Uri.parse("${dotenv.env['API_URL']}:8080/myprofile/guestMode"),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
       },
     );
     if(response.statusCode == 200) {
-      AlertDialog(
-        title: Text('탑승자 모드 전환 완료'),
-        content: Text('탑승자 모드로 전환이 완료되었습니다.'),
-        actions: <Widget>[
-          TextButton(
-            child: Text('확인'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('탑승자 모드 전환 완료'),
+              content: Text('탑승자 모드로 전환이 완료되었습니다.'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('확인'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          }
       );
     }
   }
+
 
   Future<int> fetchUserStatus() async {
     var token = await getToken();
