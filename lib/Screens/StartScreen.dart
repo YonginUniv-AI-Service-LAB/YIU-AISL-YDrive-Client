@@ -214,7 +214,7 @@ class _StartScreenState extends State<StartScreen> {
                                           child: Text(DateFormat(
                                                   'yyyy-MM-dd HH:mm')
                                               .format(DateTime.parse(
-                                                  snapshot.data![idx].date))),
+                                                  snapshot.data![reversedIdx].date))),
                                         ),
                                       ),
                                       Container(

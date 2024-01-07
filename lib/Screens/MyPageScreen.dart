@@ -1,8 +1,10 @@
+import 'package:aisl_carpool_front/Data/UseList.dart';
 import 'package:aisl_carpool_front/Screens/ModifydataScreen.dart';
 import 'package:aisl_carpool_front/Screens/StartScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -14,15 +16,21 @@ class MyPageScreen extends StatefulWidget {
 }
 
 class _MyPageScreenState extends State<MyPageScreen> {
+  late Future<List<UseList>> futureUseListData;
+  String selectedButton = '차주';
+
+  void initState() {
+    super.initState();
+    fetchProfile();
+    futureUseListData = fetchOwnerList();
+  }
+
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
   final homeController = TextEditingController();
   final carNumController = TextEditingController();
 
-  void initState() {
-    super.initState();
-    fetchProfile();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +42,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
           leading: IconButton(
             onPressed: () {},
             icon: Icon(
-              Icons.notifications_none,
+              Icons.list,
               color: Color(0xFF9EA1CA),
             ),
             iconSize: 40,
@@ -60,11 +68,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (BuildContext context) => StartScreen()),
+                      builder: (BuildContext context) => MyPageScreen()),
                 );
               },
               icon: Icon(
-                Icons.home,
+                Icons.person,
                 color: Color(0xFF9EA1CA),
               ),
               iconSize: 40,
@@ -170,11 +178,28 @@ class _MyPageScreenState extends State<MyPageScreen> {
                       backgroundColor: Color(0xFF9EA1CA),
                       side: BorderSide(width: 1.0, color: Color(0xFF9EA1CA)),
                     ),
-                    child: (Text(
-                      '탑승자로 전환',
-                      style: TextStyle(color: Color(0xFF000000)),
-                    )),
-                    onPressed: () {},
+                    child: FutureBuilder<int>(
+                      future: fetchUserStatus(), // fetchUserStatus 함수를 Future로 사용
+                      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                        // 데이터가 아직 준비되지 않았을 때
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return CircularProgressIndicator(); // 로딩 인디케이터 표시
+                        } else {
+                          if (snapshot.hasError)
+                            return Text('Error: ${snapshot.error}');
+                          else
+                            return Text(snapshot.data == 1 ? '탑승자로 전환' : '차주로 전환'); // 데이터에 따라 텍스트 변경
+                        }
+                      },
+                    ),
+                    onPressed: () async {
+                      int status = await fetchUserStatus();
+                      if (status == 1) {
+                        await changeGuestMode();
+                      } else {
+                        await changeOwnerMode();
+                      }
+                    },
                   ),
                 )
               ]),
@@ -195,7 +220,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                       margin: EdgeInsets.only(left: 60),
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          backgroundColor: Color(0xFF9EA1CA),
+                          backgroundColor: selectedButton == '차주' ? Color(0xFF9EA1CA) : Color(0xFF),
                           side:
                               BorderSide(width: 1.0, color: Color(0xFF9EA1CA)),
                         ),
@@ -204,7 +229,12 @@ class _MyPageScreenState extends State<MyPageScreen> {
                           style:
                               TextStyle(color: Color(0xFF000000), fontSize: 17),
                         )),
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            futureUseListData = fetchOwnerList();
+                            selectedButton = '차주';
+                          });
+                        },
                       ),
                     ),
                     Container(
@@ -212,7 +242,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                       margin: EdgeInsets.only(left: 10),
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          backgroundColor: Color(0xFF),
+                          backgroundColor: selectedButton == '탑승자' ? Color(0xFF9EA1CA) : Color(0xFF),
                           side:
                               BorderSide(width: 1.0, color: Color(0xFF9EA1CA)),
                         ),
@@ -221,145 +251,165 @@ class _MyPageScreenState extends State<MyPageScreen> {
                           style:
                               TextStyle(color: Color(0xFF000000), fontSize: 17),
                         )),
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            futureUseListData = fetchGuestList();
+                            selectedButton = '탑승자';
+                          });
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (BuildContext ctx, int idx) {
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Color(0xFF9EA1CA),
-                              ),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Container(
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                bottom: 20, top: 10),
-                                            child: DefaultTextStyle(
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  color: Color(0xFF000000)),
-                                              child: Text('이용 날짜'),
+                child: FutureBuilder<List<UseList>>(
+                  future: futureUseListData,
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext ctx, int idx) {
+                          return Padding(
+                            padding: EdgeInsets.only(bottom: 10),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Color(0xFF9EA1CA),
+                                    ),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Container(
+                                  child: TextButton(
+                                    onPressed: () {},
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          bottom: 20, top: 10),
+                                                      child: DefaultTextStyle(
+                                                        style: TextStyle(
+                                                            fontSize: 17,
+                                                            color: Color(0xFF000000)),
+                                                        child: Text('이용 날짜'),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )),
+                                            Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          bottom: 20, top: 10),
+                                                      child: DefaultTextStyle(
+                                                        style: TextStyle(
+                                                            fontSize: 17,
+                                                            color: Color(0xFF000000)),
+                                                        child: Text(DateFormat(
+                                                            'yyyy-MM-dd')
+                                                            .format(DateTime.parse(
+                                                            snapshot.data![idx].date))),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ))
+                                          ],
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              height: 23,
+                                              width: 60,
+                                              margin: EdgeInsets.only(bottom: 10),
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius.circular(10),
+                                                  color: Color(0xFF9EA1CA)),
+                                              child: DefaultTextStyle(
+                                                  style: TextStyle(
+                                                      fontSize: 13,
+                                                      color: Color(0xFF000000)),
+                                                  child: Text('출발')),
                                             ),
-                                          ),
-                                        ],
-                                      )),
-                                      Expanded(
-                                          child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                bottom: 20, top: 10),
-                                            child: DefaultTextStyle(
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  color: Color(0xFF000000)),
-                                              child: Text('2023년 12월 30일'),
+                                            Container(
+                                              margin:
+                                              EdgeInsets.only(top: 3, left: 10),
+                                              child: DefaultTextStyle(
+                                                  style: TextStyle(
+                                                      fontSize: 17,
+                                                      color: Color(0xFF000000)),
+                                                  child: Text(snapshot
+                                                      .data![idx].start)),
                                             ),
-                                          ),
-                                        ],
-                                      ))
-                                    ],
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 23,
-                                        width: 60,
-                                        margin: EdgeInsets.only(bottom: 10),
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: Color(0xFF9EA1CA)),
-                                        child: DefaultTextStyle(
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                color: Color(0xFF000000)),
-                                            child: Text('출발')),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 3, left: 10),
-                                        child: DefaultTextStyle(
+                                          ],
+                                        ),
+                                        Container(
+                                          margin:
+                                          EdgeInsets.only(bottom: 10, left: 25),
+                                          child: DefaultTextStyle(
                                             style: TextStyle(
                                                 fontSize: 17,
                                                 color: Color(0xFF000000)),
-                                            child: Text('신논현역 3번')),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(bottom: 10, left: 25),
-                                    child: DefaultTextStyle(
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          color: Color(0xFF000000)),
-                                      child: Text('↓'),
+                                            child: Text('↓'),
+                                          ),
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              height: 23,
+                                              width: 60,
+                                              margin: EdgeInsets.only(bottom: 20),
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius.circular(10),
+                                                  color: Color(0xFF9EA1CA)),
+                                              child: DefaultTextStyle(
+                                                  style: TextStyle(
+                                                      fontSize: 13,
+                                                      color: Color(0xFF000000)),
+                                                  child: Text('도착')),
+                                            ),
+                                            Container(
+                                              margin:
+                                              EdgeInsets.only(top: 3, left: 10),
+                                              child: DefaultTextStyle(
+                                                  style: TextStyle(
+                                                      fontSize: 17,
+                                                      color: Color(0xFF000000)),
+                                                  child: Text(snapshot
+                                                      .data![idx].end)),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 23,
-                                        width: 60,
-                                        margin: EdgeInsets.only(bottom: 20),
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: Color(0xFF9EA1CA)),
-                                        child: DefaultTextStyle(
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                color: Color(0xFF000000)),
-                                            child: Text('도착')),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 3, left: 10),
-                                        child: DefaultTextStyle(
-                                            style: TextStyle(
-                                                fontSize: 17,
-                                                color: Color(0xFF000000)),
-                                            child: Text('용인대학교')),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )),
-                    );
+                                )),
+                          );
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }
+                    return CircularProgressIndicator();
                   },
-                ),
+                )
               )
             ],
           ),
@@ -388,9 +438,117 @@ class _MyPageScreenState extends State<MyPageScreen> {
     }
   }
 
-  Future<void> setToken(String token) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('token', token);
+  Future<List<UseList>> fetchOwnerList() async {
+    var token = await getToken();
+    final response = await http.get(
+      Uri.parse("${dotenv.env['API_URL']}:8080/list/owner"),
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if(response.statusCode == 200) {
+      List jsonResponse = json.decode(response.body);
+      if(jsonResponse.isEmpty) {
+        throw Exception('이용 내역이 없습니다.');
+      } else {
+        return jsonResponse.map((item) => UseList.fromJson(item)).toList();
+      }
+    } else {
+      throw Exception('Failed to load ownerReviewed Data');
+    }
+  }
+
+  Future<List<UseList>> fetchGuestList() async {
+    var token = await getToken();
+    final response = await http.get(
+      Uri.parse("${dotenv.env['API_URL']}:8080/list/guest"),
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if(response.statusCode == 200) {
+      List jsonResponse = json.decode(response.body);
+      if(jsonResponse.isEmpty) {
+        throw Exception('이용 내역이 없습니다.');
+      } else {
+        return jsonResponse.map((item) => UseList.fromJson(item)).toList();
+      }
+    } else {
+      throw Exception('Failed to load ownerReviewed Data');
+    }
+  }
+
+  Future<void> changeOwnerMode() async {
+    var token = await getToken();
+    final response = await http.get(
+      Uri.parse("${dotenv.env['API_URL']}:8080/myprofile/ownerMode"),
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    var jsonResponse = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('차주 모드 전환 완료'),
+            content: Text('차주 모드로 전환이 완료되었습니다.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('확인'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  Future<void> changeGuestMode() async {
+    var token = await getToken();
+    final response = await http.get(
+      Uri.parse("${dotenv.env['API_URL']}:8080/myprofile/guestMode"),
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if(response.statusCode == 200) {
+      AlertDialog(
+        title: Text('탑승자 모드 전환 완료'),
+        content: Text('탑승자 모드로 전환이 완료되었습니다.'),
+        actions: <Widget>[
+          TextButton(
+            child: Text('확인'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    }
+  }
+
+  Future<int> fetchUserStatus() async {
+    var token = await getToken();
+    final response = await http.get(
+      Uri.parse(
+          "${dotenv.env['API_URL']}:8080/user/getStatus"), // 사용자 상태를 가져오는 API endpoint
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      int status = jsonResponse['state']; // API 응답에서 status 값을 가져옵니다
+      return status;
+    } else {
+      throw Exception('Failed to fetch user status');
+    }
   }
 
   Future<String> getToken() async {
