@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "469293033247",
+    "project_id": "ydrivefcm-dbfd2",
+    "storage_bucket": "ydrivefcm-dbfd2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469293033247:android:9f2aa6ad0d1f160d40722a",
+        "android_client_info": {
+          "package_name": "yiu.aisl.aisl_carpool_front"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHGN4PYrWZM6uMH5T2LthQZwUGpW8Xvao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
