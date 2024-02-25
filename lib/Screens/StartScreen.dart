@@ -40,21 +40,21 @@ class _StartScreenState extends State<StartScreen> {
             bool exit = await showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text("앱 종료"),
-                  content: Text("앱을 종료하시겠습니까?"),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.of(context)
-                          .pop(false), // 아니요를 선택하면 다이얼로그를 닫습니다.
-                      child: Text('아니요'),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.of(context)
-                          .pop(true), // 예를 선택하면 다이얼로그를 닫고 앱을 종료합니다.
-                      child: Text('예'),
-                    ),
-                  ],
-                ));
+                      title: Text("앱 종료"),
+                      content: Text("앱을 종료하시겠습니까?"),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.of(context)
+                              .pop(false), // 아니요를 선택하면 다이얼로그를 닫습니다.
+                          child: Text('아니요'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.of(context)
+                              .pop(true), // 예를 선택하면 다이얼로그를 닫고 앱을 종료합니다.
+                          child: Text('예'),
+                        ),
+                      ],
+                    ));
             return exit ?? false;
           },
           child: Scaffold(
@@ -99,11 +99,11 @@ class _StartScreenState extends State<StartScreen> {
                           width: 80, scale: 1.3),
                       DefaultTextStyle(
                           style:
-                          TextStyle(fontSize: 40, color: Color(0xFF9EA1CA)),
+                              TextStyle(fontSize: 40, color: Color(0xFF9EA1CA)),
                           child: Text('Y')),
                       DefaultTextStyle(
                           style:
-                          TextStyle(fontSize: 40, color: Color(0xffFFFFFF)),
+                              TextStyle(fontSize: 40, color: Color(0xffFFFFFF)),
                           child: Text('DRIVE')),
                     ],
                   ),
@@ -193,790 +193,769 @@ class _StartScreenState extends State<StartScreen> {
                     ),
                     Expanded(
                         child: FutureBuilder<List<Carpool>>(
-                          future: futureCarpoolData,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              var carpools = snapshot.data!;
-                              return RefreshIndicator(child: ListView.builder(
+                      future: futureCarpoolData,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          var carpools = snapshot.data!;
+                          return RefreshIndicator(
+                              child: ListView.builder(
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext ctx, int idx) {
-                                  int reversedIdx = snapshot.data!.length - 1 - idx;
+                                  int reversedIdx =
+                                      snapshot.data!.length - 1 - idx;
                                   return Padding(
                                     padding: EdgeInsets.all(10),
                                     child: TextButton(
                                         onPressed: () {
                                           Navigator.of(context).push(
                                             MaterialPageRoute(
-                                                builder: (BuildContext context) =>
-                                                    PostDetailScreen(
-                                                        carpool:
-                                                        carpools[reversedIdx])),
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        PostDetailScreen(
+                                                            carpool: carpools[
+                                                                reversedIdx])),
                                           );
                                         },
-                                        child: (snapshot.data![reversedIdx].email ==
-                                            userEmail)
-                                            ? Container(
-                                          height: 200,
-                                          padding: EdgeInsets.only(
-                                              bottom: 25,
-                                              left: 15,
-                                              right: 15),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: Color(0xFF9EA1CA),
-                                              ),
-                                              borderRadius:
-                                              BorderRadius.circular(10)),
-                                          child: Column(
-                                            children: [
-                                              SizedBox(
-                                                height: 30,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                                  children: [
-                                                    // SizedBox(
-                                                    //   width: 50,
-                                                    //   height: 40,
-                                                    //   child: TextButton(
-                                                    //     child: (DefaultTextStyle(
-                                                    //         style: TextStyle(
-                                                    //             fontSize: 13,
-                                                    //             color: Color(
-                                                    //                 0xFF9EA1CA)),
-                                                    //         child: Text('수정'))),
-                                                    //     onPressed: () {},
-                                                    //   ),
-                                                    // ),
-                                                    // Container(
-                                                    //   padding: EdgeInsets.only(
-                                                    //       bottom: 5),
-                                                    //   child: DefaultTextStyle(
-                                                    //       style: TextStyle(
-                                                    //           fontSize: 20,
-                                                    //           color: Color(
-                                                    //               0xFF9EA1CA)),
-                                                    //       child: Text('|')),
-                                                    // ),
-                                                    SizedBox(
-                                                      width: 50,
-                                                      height: 40,
-                                                      child: TextButton(
-                                                        child: (DefaultTextStyle(
-                                                            style: TextStyle(
-                                                                fontSize: 13,
-                                                                color: Color(
-                                                                    0xFF9EA1CA)),
-                                                            child:
-                                                            Text('삭제'))),
-                                                        onPressed: () {
-                                                          showDialog(
-                                                              context:
-                                                              context,
-                                                              builder:
-                                                                  (BuildContext
-                                                              context) {
-                                                                return AlertDialog(
-                                                                  title: Text(
-                                                                      '게시물 삭제'),
-                                                                  content: Text(
-                                                                      '해당 게시물을 삭제하시겠습니까?'),
-                                                                  actions: <Widget>[
+                                        child:
+                                            (snapshot.data![reversedIdx]
+                                                        .email ==
+                                                    userEmail)
+                                                ? Container(
+                                                    height: 220,
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 25,
+                                                        left: 15,
+                                                        right: 15),
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color:
+                                                              Color(0xFF9EA1CA),
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)),
+                                                    child: Column(
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 38,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              // SizedBox(
+                                                              //   width: 50,
+                                                              //   height: 40,
+                                                              //   child: TextButton(
+                                                              //     child: (DefaultTextStyle(
+                                                              //         style: TextStyle(
+                                                              //             fontSize: 13,
+                                                              //             color: Color(
+                                                              //                 0xFF9EA1CA)),
+                                                              //         child: Text('수정'))),
+                                                              //     onPressed: () {},
+                                                              //   ),
+                                                              // ),
+                                                              // Container(
+                                                              //   padding: EdgeInsets.only(
+                                                              //       bottom: 5),
+                                                              //   child: DefaultTextStyle(
+                                                              //       style: TextStyle(
+                                                              //           fontSize: 20,
+                                                              //           color: Color(
+                                                              //               0xFF9EA1CA)),
+                                                              //       child: Text('|')),
+                                                              // ),
+                                                              SizedBox(
+                                                                width: 50,
+                                                                height: 40,
+                                                                child:
                                                                     TextButton(
-                                                                      onPressed:
-                                                                          () {
-                                                                        // '아니요' 버튼을 눌렀을 때 수행할 동작
-                                                                        Navigator.of(context)
-                                                                            .pop(); // AlertDialog를 닫음
-                                                                      },
+                                                                  child: (DefaultTextStyle(
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: Color(
+                                                                              0xFF9EA1CA)),
                                                                       child: Text(
-                                                                          '아니요'),
+                                                                          '삭제'))),
+                                                                  onPressed:
+                                                                      () {
+                                                                    showDialog(
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (BuildContext
+                                                                                context) {
+                                                                          return AlertDialog(
+                                                                            title:
+                                                                                Text('게시물 삭제'),
+                                                                            content:
+                                                                                Text('해당 게시물을 삭제하시겠습니까?'),
+                                                                            actions: <Widget>[
+                                                                              TextButton(
+                                                                                onPressed: () {
+                                                                                  // '아니요' 버튼을 눌렀을 때 수행할 동작
+                                                                                  Navigator.of(context).pop(); // AlertDialog를 닫음
+                                                                                },
+                                                                                child: Text('아니요'),
+                                                                              ),
+                                                                              TextButton(
+                                                                                onPressed: () {
+                                                                                  delete(carpools[reversedIdx].carpoolNum);
+                                                                                },
+                                                                                child: Text('예'),
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        });
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Expanded(
+                                                                child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              10,
+                                                                          top:
+                                                                              10),
+                                                                  child:
+                                                                      DefaultTextStyle(
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            17,
+                                                                        color: Color(
+                                                                            0xFF000000)),
+                                                                    child: Text(
+                                                                        '경로정보'),
+                                                                  ),
+                                                                ),
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          23,
+                                                                      width: 60,
+                                                                      margin: EdgeInsets.only(
+                                                                          bottom:
+                                                                              10),
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          color:
+                                                                              Color(0xFF9EA1CA)),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize: 13,
+                                                                              color: Color(0xFF000000)),
+                                                                          child: Text('출발')),
                                                                     ),
-                                                                    TextButton(
-                                                                      onPressed:
-                                                                          () {
-                                                                        delete(
-                                                                            carpools[reversedIdx].carpoolNum);
-                                                                      },
-                                                                      child: Text(
-                                                                          '예'),
+                                                                    Container(
+                                                                      width: 70,
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              3,
+                                                                          left:
+                                                                              10),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize:
+                                                                                  13,
+                                                                              color: Color(
+                                                                                  0xFF000000)),
+                                                                          child: Text(snapshot
+                                                                              .data![reversedIdx]
+                                                                              .start)),
                                                                     ),
                                                                   ],
-                                                                );
-                                                              });
-                                                        },
-                                                      ),
+                                                                ),
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              10,
+                                                                          left:
+                                                                              25),
+                                                                  child:
+                                                                      DefaultTextStyle(
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            17,
+                                                                        color: Color(
+                                                                            0xFF000000)),
+                                                                    child: Text(
+                                                                        '↓'),
+                                                                  ),
+                                                                ),
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          23,
+                                                                      width: 60,
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          color:
+                                                                              Color(0xFF9EA1CA)),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize: 13,
+                                                                              color: Color(0xFF000000)),
+                                                                          child: Text('도착')),
+                                                                    ),
+                                                                    Container(
+                                                                      width: 70,
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              3,
+                                                                          left:
+                                                                              10),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize:
+                                                                                  13,
+                                                                              color: Color(
+                                                                                  0xFF000000)),
+                                                                          child: Text(snapshot
+                                                                              .data![reversedIdx]
+                                                                              .end)),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            )),
+                                                            Expanded(
+                                                                child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              10,
+                                                                          top:
+                                                                              9),
+                                                                  child: DefaultTextStyle(
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              17,
+                                                                          color: Color(
+                                                                              0xFF000000)),
+                                                                      child: Text(
+                                                                          '카풀 세부 정보') //Text(nameController.text),
+                                                                      ),
+                                                                ),
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          23,
+                                                                      width: 60,
+                                                                      margin: EdgeInsets.only(
+                                                                          bottom:
+                                                                              10),
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          color:
+                                                                              Color(0xFF9EA1CA)),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize: 13,
+                                                                              color: Color(0xFF000000)),
+                                                                          child: Text('날짜')),
+                                                                    ),
+                                                                    Container(
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              3,
+                                                                          left:
+                                                                              10),
+                                                                      child:
+                                                                          DefaultTextStyle(
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                13,
+                                                                            color:
+                                                                                Color(0xFF000000)),
+                                                                        child: Text(DateFormat('yyyy.MM.dd').format(DateTime.parse(snapshot
+                                                                            .data![reversedIdx]
+                                                                            .date))),
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          23,
+                                                                      width: 60,
+                                                                      margin: EdgeInsets.only(
+                                                                          bottom:
+                                                                              10),
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          color:
+                                                                              Color(0xFF9EA1CA)),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize: 13,
+                                                                              color: Color(0xFF000000)),
+                                                                          child: Text('시간')),
+                                                                    ),
+                                                                    Container(
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              3,
+                                                                          left:
+                                                                              10),
+                                                                      child:
+                                                                          DefaultTextStyle(
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                13,
+                                                                            color:
+                                                                                Color(0xFF000000)),
+                                                                        child: Text(DateFormat('HH:mm').format(DateTime.parse(snapshot
+                                                                            .data![reversedIdx]
+                                                                            .date))),
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          23,
+                                                                      width: 60,
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          color:
+                                                                              Color(0xFF9EA1CA)),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize: 13,
+                                                                              color: Color(0xFF000000)),
+                                                                          child: Text('인원')),
+                                                                    ),
+                                                                    Container(
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              3,
+                                                                          left:
+                                                                              10),
+                                                                      child:
+                                                                          DefaultTextStyle(
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                13,
+                                                                            color:
+                                                                                Color(0xFF000000)),
+                                                                        child: Text(
+                                                                            '${snapshot.data![reversedIdx].memberNum}명'),
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ))
+                                                          ],
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                        children: [
-                                                          Container(
-                                                            margin:
-                                                            EdgeInsets.only(
-                                                                bottom: 10,
-                                                                top: 10),
-                                                            child:
-                                                            DefaultTextStyle(
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  color: Color(
-                                                                      0xFF000000)),
-                                                              child: Text('경로정보'),
-                                                            ),
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                  )
+                                                : Container(
+                                                    height: 200,
+                                                    padding: EdgeInsets.only(
+                                                      bottom: 25,
+                                                      left: 15,
+                                                      right: 15,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color:
+                                                              Color(0xFF9EA1CA),
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)),
+                                                    child: Column(
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 30,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
                                                             children: [
-                                                              Container(
-                                                                height: 23,
-                                                                width: 60,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    bottom:
-                                                                    10),
-                                                                alignment:
-                                                                Alignment
-                                                                    .center,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        10),
-                                                                    color: Color(
-                                                                        0xFF9EA1CA)),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(
-                                                                        '출발')),
-                                                              ),
-                                                              Container(
-                                                                width: 70,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    top: 3,
-                                                                    left: 10),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(snapshot
-                                                                        .data![
-                                                                    reversedIdx]
-                                                                        .start)),
-                                                              ),
+                                                              SizedBox(
+                                                                  width: 50,
+                                                                  height: 40,
+                                                                  child:
+                                                                      Container()),
                                                             ],
                                                           ),
-                                                          Container(
-                                                            margin:
-                                                            EdgeInsets.only(
-                                                                bottom: 10,
-                                                                left: 25),
-                                                            child:
-                                                            DefaultTextStyle(
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  color: Color(
-                                                                      0xFF000000)),
-                                                              child: Text('↓'),
-                                                            ),
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              Container(
-                                                                height: 23,
-                                                                width: 60,
-                                                                alignment:
-                                                                Alignment
-                                                                    .center,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        10),
-                                                                    color: Color(
-                                                                        0xFF9EA1CA)),
-                                                                child: DefaultTextStyle(
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Expanded(
+                                                                child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              10,
+                                                                          top:
+                                                                              10),
+                                                                  child:
+                                                                      DefaultTextStyle(
                                                                     style: TextStyle(
                                                                         fontSize:
-                                                                        13,
+                                                                            17,
                                                                         color: Color(
                                                                             0xFF000000)),
                                                                     child: Text(
-                                                                        '도착')),
-                                                              ),
-                                                              Container(
-                                                                width: 70,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    top: 3,
-                                                                    left: 10),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(snapshot
-                                                                        .data![
-                                                                    reversedIdx]
-                                                                        .end)),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      )),
-                                                  Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                        children: [
-                                                          Container(
-                                                            margin:
-                                                            EdgeInsets.only(
-                                                                bottom: 10,
-                                                                top: 9),
-                                                            child: DefaultTextStyle(
-                                                                style: TextStyle(
-                                                                    fontSize: 17,
-                                                                    color: Color(
-                                                                        0xFF000000)),
-                                                                child: Text(
-                                                                    '카풀 세부 정보') //Text(nameController.text),
-                                                            ),
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              Container(
-                                                                height: 23,
-                                                                width: 60,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    bottom:
-                                                                    10),
-                                                                alignment:
-                                                                Alignment
-                                                                    .center,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        10),
-                                                                    color: Color(
-                                                                        0xFF9EA1CA)),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(
-                                                                        '날짜')),
-                                                              ),
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    top: 3,
-                                                                    left: 10),
-                                                                child:
-                                                                DefaultTextStyle(
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                      13,
-                                                                      color: Color(
-                                                                          0xFF000000)),
-                                                                  child: Text(DateFormat(
-                                                                      'yyyy.MM.dd')
-                                                                      .format(DateTime.parse(snapshot
-                                                                      .data![
-                                                                  reversedIdx]
-                                                                      .date))),
+                                                                        '경로정보'),
+                                                                  ),
                                                                 ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              Container(
-                                                                height: 23,
-                                                                width: 60,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    bottom:
-                                                                    10),
-                                                                alignment:
-                                                                Alignment
-                                                                    .center,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        10),
-                                                                    color: Color(
-                                                                        0xFF9EA1CA)),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(
-                                                                        '시간')),
-                                                              ),
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    top: 3,
-                                                                    left: 10),
-                                                                child:
-                                                                DefaultTextStyle(
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                      13,
-                                                                      color: Color(
-                                                                          0xFF000000)),
-                                                                  child: Text(DateFormat(
-                                                                      'HH:mm')
-                                                                      .format(DateTime.parse(snapshot
-                                                                      .data![
-                                                                  reversedIdx]
-                                                                      .date))),
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          23,
+                                                                      width: 60,
+                                                                      margin: EdgeInsets.only(
+                                                                          bottom:
+                                                                              10),
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          color:
+                                                                              Color(0xFF9EA1CA)),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize: 13,
+                                                                              color: Color(0xFF000000)),
+                                                                          child: Text('출발')),
+                                                                    ),
+                                                                    Container(
+                                                                      width: 70,
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              3,
+                                                                          left:
+                                                                              10),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize:
+                                                                                  13,
+                                                                              color: Color(
+                                                                                  0xFF000000)),
+                                                                          child: Text(snapshot
+                                                                              .data![reversedIdx]
+                                                                              .start)),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              Container(
-                                                                height: 23,
-                                                                width: 60,
-                                                                alignment:
-                                                                Alignment
-                                                                    .center,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        10),
-                                                                    color: Color(
-                                                                        0xFF9EA1CA)),
-                                                                child: DefaultTextStyle(
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              10,
+                                                                          left:
+                                                                              25),
+                                                                  child:
+                                                                      DefaultTextStyle(
                                                                     style: TextStyle(
                                                                         fontSize:
-                                                                        13,
+                                                                            17,
                                                                         color: Color(
                                                                             0xFF000000)),
                                                                     child: Text(
-                                                                        '인원')),
-                                                              ),
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    top: 3,
-                                                                    left: 10),
-                                                                child:
-                                                                DefaultTextStyle(
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                      13,
-                                                                      color: Color(
-                                                                          0xFF000000)),
-                                                                  child: Text(
-                                                                      '${snapshot.data![reversedIdx].memberNum}명'),
+                                                                        '↓'),
+                                                                  ),
                                                                 ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ))
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                            : Container(
-                                          height: 200,
-                                          padding: EdgeInsets.only(
-                                            bottom: 25,
-                                            left: 15,
-                                            right: 15,
-                                          ),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: Color(0xFF9EA1CA),
-                                              ),
-                                              borderRadius:
-                                              BorderRadius.circular(10)),
-                                          child: Column(
-                                            children: [
-                                              SizedBox(
-                                                height: 30,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                                  children: [
-                                                    SizedBox(
-                                                        width: 50,
-                                                        height: 40,
-                                                        child: Container()),
-                                                  ],
-                                                ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                        children: [
-                                                          Container(
-                                                            margin:
-                                                            EdgeInsets.only(
-                                                                bottom: 10,
-                                                                top: 10),
-                                                            child:
-                                                            DefaultTextStyle(
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  color: Color(
-                                                                      0xFF000000)),
-                                                              child: Text('경로정보'),
-                                                            ),
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              Container(
-                                                                height: 23,
-                                                                width: 60,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    bottom:
-                                                                    10),
-                                                                alignment:
-                                                                Alignment
-                                                                    .center,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        10),
-                                                                    color: Color(
-                                                                        0xFF9EA1CA)),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(
-                                                                        '출발')),
-                                                              ),
-                                                              Container(
-                                                                width: 70,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    top: 3,
-                                                                    left: 10),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(snapshot
-                                                                        .data![
-                                                                    reversedIdx]
-                                                                        .start)),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Container(
-                                                            margin:
-                                                            EdgeInsets.only(
-                                                                bottom: 10,
-                                                                left: 25),
-                                                            child:
-                                                            DefaultTextStyle(
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  color: Color(
-                                                                      0xFF000000)),
-                                                              child: Text('↓'),
-                                                            ),
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              Container(
-                                                                height: 23,
-                                                                width: 60,
-                                                                alignment:
-                                                                Alignment
-                                                                    .center,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        10),
-                                                                    color: Color(
-                                                                        0xFF9EA1CA)),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(
-                                                                        '도착')),
-                                                              ),
-                                                              Container(
-                                                                width: 70,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    top: 3,
-                                                                    left: 10),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(snapshot
-                                                                        .data![
-                                                                    reversedIdx]
-                                                                        .end)),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      )),
-                                                  Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                        children: [
-                                                          Container(
-                                                            margin:
-                                                            EdgeInsets.only(
-                                                                bottom: 10,
-                                                                top: 9),
-                                                            child: DefaultTextStyle(
-                                                                style: TextStyle(
-                                                                    fontSize: 17,
-                                                                    color: Color(
-                                                                        0xFF000000)),
-                                                                child: Text(
-                                                                    '카풀 세부 정보') //Text(nameController.text),
-                                                            ),
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              Container(
-                                                                height: 23,
-                                                                width: 60,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    bottom:
-                                                                    10),
-                                                                alignment:
-                                                                Alignment
-                                                                    .center,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        10),
-                                                                    color: Color(
-                                                                        0xFF9EA1CA)),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(
-                                                                        '날짜')),
-                                                              ),
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    top: 3,
-                                                                    left: 10),
-                                                                child:
-                                                                DefaultTextStyle(
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                      13,
-                                                                      color: Color(
-                                                                          0xFF000000)),
-                                                                  child: Text(DateFormat(
-                                                                      'yyyy.MM.dd')
-                                                                      .format(DateTime.parse(snapshot
-                                                                      .data![
-                                                                  reversedIdx]
-                                                                      .date))),
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          23,
+                                                                      width: 60,
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          color:
+                                                                              Color(0xFF9EA1CA)),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize: 13,
+                                                                              color: Color(0xFF000000)),
+                                                                          child: Text('도착')),
+                                                                    ),
+                                                                    Container(
+                                                                      width: 70,
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              3,
+                                                                          left:
+                                                                              10),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize:
+                                                                                  13,
+                                                                              color: Color(
+                                                                                  0xFF000000)),
+                                                                          child: Text(snapshot
+                                                                              .data![reversedIdx]
+                                                                              .end)),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              Container(
-                                                                height: 23,
-                                                                width: 60,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    bottom:
-                                                                    10),
-                                                                alignment:
-                                                                Alignment
-                                                                    .center,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        10),
-                                                                    color: Color(
-                                                                        0xFF9EA1CA)),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(
-                                                                        '시간')),
-                                                              ),
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    top: 3,
-                                                                    left: 10),
-                                                                child:
-                                                                DefaultTextStyle(
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                      13,
-                                                                      color: Color(
-                                                                          0xFF000000)),
-                                                                  child: Text(DateFormat(
-                                                                      'HH:mm')
-                                                                      .format(DateTime.parse(snapshot
-                                                                      .data![
-                                                                  reversedIdx]
-                                                                      .date))),
+                                                              ],
+                                                            )),
+                                                            Expanded(
+                                                                child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              10,
+                                                                          top:
+                                                                              9),
+                                                                  child: DefaultTextStyle(
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              17,
+                                                                          color: Color(
+                                                                              0xFF000000)),
+                                                                      child: Text(
+                                                                          '카풀 세부 정보') //Text(nameController.text),
+                                                                      ),
                                                                 ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              Container(
-                                                                height: 23,
-                                                                width: 60,
-                                                                alignment:
-                                                                Alignment
-                                                                    .center,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        10),
-                                                                    color: Color(
-                                                                        0xFF9EA1CA)),
-                                                                child: DefaultTextStyle(
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        13,
-                                                                        color: Color(
-                                                                            0xFF000000)),
-                                                                    child: Text(
-                                                                        '인원')),
-                                                              ),
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                    top: 3,
-                                                                    left: 10),
-                                                                child:
-                                                                DefaultTextStyle(
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                      13,
-                                                                      color: Color(
-                                                                          0xFF000000)),
-                                                                  child: Text(
-                                                                      '${snapshot.data![reversedIdx].memberNum}명'),
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          23,
+                                                                      width: 60,
+                                                                      margin: EdgeInsets.only(
+                                                                          bottom:
+                                                                              10),
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          color:
+                                                                              Color(0xFF9EA1CA)),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize: 13,
+                                                                              color: Color(0xFF000000)),
+                                                                          child: Text('날짜')),
+                                                                    ),
+                                                                    Container(
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              3,
+                                                                          left:
+                                                                              10),
+                                                                      child:
+                                                                          DefaultTextStyle(
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                13,
+                                                                            color:
+                                                                                Color(0xFF000000)),
+                                                                        child: Text(DateFormat('yyyy.MM.dd').format(DateTime.parse(snapshot
+                                                                            .data![reversedIdx]
+                                                                            .date))),
+                                                                      ),
+                                                                    )
+                                                                  ],
                                                                 ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ))
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        )),
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          23,
+                                                                      width: 60,
+                                                                      margin: EdgeInsets.only(
+                                                                          bottom:
+                                                                              10),
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          color:
+                                                                              Color(0xFF9EA1CA)),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize: 13,
+                                                                              color: Color(0xFF000000)),
+                                                                          child: Text('시간')),
+                                                                    ),
+                                                                    Container(
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              3,
+                                                                          left:
+                                                                              10),
+                                                                      child:
+                                                                          DefaultTextStyle(
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                13,
+                                                                            color:
+                                                                                Color(0xFF000000)),
+                                                                        child: Text(DateFormat('HH:mm').format(DateTime.parse(snapshot
+                                                                            .data![reversedIdx]
+                                                                            .date))),
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          23,
+                                                                      width: 60,
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          color:
+                                                                              Color(0xFF9EA1CA)),
+                                                                      child: DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              fontSize: 13,
+                                                                              color: Color(0xFF000000)),
+                                                                          child: Text('인원')),
+                                                                    ),
+                                                                    Container(
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              3,
+                                                                          left:
+                                                                              10),
+                                                                      child:
+                                                                          DefaultTextStyle(
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                13,
+                                                                            color:
+                                                                                Color(0xFF000000)),
+                                                                        child: Text(
+                                                                            '${snapshot.data![reversedIdx].memberNum}명'),
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ))
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )),
                                   );
                                 },
-                              ), onRefresh: ()async{
+                              ),
+                              onRefresh: () async {
                                 setState(() {
                                   futureCarpoolData = fetchCarpoolDataByTime();
                                 });
                               });
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
 
-                            } else if (snapshot.hasError) {
-                              return Text('${snapshot.error}');
-                            }
-
-                            return CircularProgressIndicator();
-                          },
-                        ))
+                        return CircularProgressIndicator();
+                      },
+                    ))
                   ],
                 ),
               ),
@@ -1039,10 +1018,10 @@ class _StartScreenState extends State<StartScreen> {
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
       List<Carpool> carpoolList =
-      jsonResponse.map((item) => Carpool.fromJson(item)).toList();
+          jsonResponse.map((item) => Carpool.fromJson(item)).toList();
 
       carpoolList.sort(
-              (a, b) => DateTime.parse(b.date).compareTo(DateTime.parse(a.date)));
+          (a, b) => DateTime.parse(b.date).compareTo(DateTime.parse(a.date)));
       return carpoolList;
     } else {
       throw Exception('Failed to load carpool data');
@@ -1101,7 +1080,7 @@ class _StartScreenState extends State<StartScreen> {
     print("카풀 num 확인 : ${carpoolNum}");
     var token = await getToken();
     var url =
-    Uri.parse("${dotenv.env['API_URL']}:8080/carpool/delete/${carpoolNum}");
+        Uri.parse("${dotenv.env['API_URL']}:8080/carpool/delete/${carpoolNum}");
     var response = await http.delete(
       url,
       headers: <String, String>{

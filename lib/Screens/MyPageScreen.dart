@@ -83,15 +83,12 @@ class _MyPageScreenState extends State<MyPageScreen> {
             children: [
               Row(
                 children: [
-                  Image.asset('assets/titleLogo.png',
-                      width: 80, scale: 1.3),
+                  Image.asset('assets/titleLogo.png', width: 80, scale: 1.3),
                   DefaultTextStyle(
-                      style:
-                      TextStyle(fontSize: 40, color: Color(0xFF9EA1CA)),
+                      style: TextStyle(fontSize: 40, color: Color(0xFF9EA1CA)),
                       child: Text('Y')),
                   DefaultTextStyle(
-                      style:
-                      TextStyle(fontSize: 40, color: Color(0xffFFFFFF)),
+                      style: TextStyle(fontSize: 40, color: Color(0xffFFFFFF)),
                       child: Text('DRIVE')),
                 ],
               ),
@@ -101,9 +98,9 @@ class _MyPageScreenState extends State<MyPageScreen> {
             IconButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => StartScreen()),(route) => false
-                );
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => StartScreen()),
+                    (route) => false);
               },
               icon: Icon(
                 Icons.home,

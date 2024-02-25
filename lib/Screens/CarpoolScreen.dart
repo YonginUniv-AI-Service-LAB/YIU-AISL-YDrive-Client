@@ -308,26 +308,6 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
                                                   addr2Controller.text = '';
                                                   setAddr1();
                                                 });
-                                                // setState(() {
-                                                //   selectedAddr1 = value ?? ''; // 선택된 값 업데이트
-
-                                                //   // 두 번째 Dropdown의 내용을 갱신하거나 변경하는 로직 추가
-                                                //   if (selectedAddr1 == '서울시') {
-                                                //     addr2List = [
-                                                //       '종로구',
-                                                //       '중랑구'
-                                                //     ]; // 서울시가 선택되었을 때의 내용
-                                                //   } else if (selectedAddr1 == '인천시') {
-                                                //     addr2List = [
-                                                //       '연수구',
-                                                //       '남동구'
-                                                //     ]; // 인천시가 선택되었을 때의 내용
-                                                //   } else {
-                                                //     addr2List =
-                                                //         []; // 다른 지역이 선택되었을 때는 빈 리스트로 초기화
-                                                //   }
-                                                //   print(selectedAddr1);
-                                                // });
                                               },
                                               dropdownMenuEntries: addr1List
                                                   .map<
@@ -354,23 +334,6 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
                                                   addr3Controller.text = '';
                                                   setAddr2();
                                                 });
-                                                // setState(() {
-                                                //   selectedAddr2 = value ?? ''; // 선택된 값 업데이트
-
-                                                //   if (selectedAddr2 == '종로구') {
-                                                //     addr3List = ['경복궁역', '안국역'];
-                                                //   } else if (selectedAddr2 == '중랑구') {
-                                                //     addr3List = ['면목역', '중랑역'];
-                                                //   } else if (selectedAddr2 == '연수구') {
-                                                //     addr3List = ['테크노파크역', '연수역'];
-                                                //   } else if (selectedAddr2 == '남동구') {
-                                                //     addr3List = ['운연역', '만수역'];
-                                                //   } else {
-                                                //     addr3List =
-                                                //         []; // 다른 지역이 선택되었을 때는 빈 리스트로 초기화
-                                                //   }
-                                                //   print(selectedAddr2);
-                                                // });
                                               },
                                               dropdownMenuEntries: addr2List
                                                   .map<
@@ -402,38 +365,6 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
                                                   addr4Controller.text = '';
                                                   setAddr3();
                                                 });
-                                                // setState(() {
-                                                //   selectedAddr3 = value ?? ''; // 선택된 값 업데이트
-
-                                                //   if (selectedAddr3 == '경복궁역' ||
-                                                //       selectedAddr3 == '안국역') {
-                                                //     addr4List = ['1번출구', '2번출구'];
-                                                //   } else if (selectedAddr3 == '면목역' ||
-                                                //       selectedAddr3 == '중랑역') {
-                                                //     addr4List = ['1번출구', '2번출구', '3번출구'];
-                                                //   } else if (selectedAddr3 == '테크노파크역' ||
-                                                //       selectedAddr3 == '연수역') {
-                                                //     addr4List = [
-                                                //       '1번출구',
-                                                //       '2번출구',
-                                                //       '3번출구',
-                                                //       '4번출구'
-                                                //     ];
-                                                //   } else if (selectedAddr3 == '운연역' ||
-                                                //       selectedAddr3 == '만수역') {
-                                                //     addr4List = [
-                                                //       '1번출구',
-                                                //       '2번출구',
-                                                //       '3번출구',
-                                                //       '4번출구',
-                                                //       '5번출구'
-                                                //     ];
-                                                //   } else {
-                                                //     addr4List =
-                                                //         []; // 다른 지역이 선택되었을 때는 빈 리스트로 초기화
-                                                //   }
-                                                //   print(selectedAddr3);
-                                                // });
                                               },
                                               dropdownMenuEntries: addr3List
                                                   .map<
@@ -456,12 +387,7 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
                                               width: 120,
                                               //initialSelection: '',
                                               hintText: '출구 선택',
-                                              onSelected: (String? value) {
-                                                // setState(() {
-                                                //   selectedAddr4 = value ?? '';
-                                                //   print(selectedAddr4);
-                                                // });
-                                              },
+                                              onSelected: (String? value) {},
                                               dropdownMenuEntries: addr4List
                                                   .map<
                                                           DropdownMenuEntry<
@@ -874,27 +800,12 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
                                               width: 120,
                                               //initialSelection: '',
                                               hintText: '시 선택',
-                                              onSelected: (String? value) {
-                                                // setState(() {
-                                                //   selectedAddr1 = value ?? ''; // 선택된 값 업데이트
 
-                                                //   // 두 번째 Dropdown의 내용을 갱신하거나 변경하는 로직 추가
-                                                //   if (selectedAddr1 == '서울시') {
-                                                //     addr2List = [
-                                                //       '종로구',
-                                                //       '중랑구'
-                                                //     ]; // 서울시가 선택되었을 때의 내용
-                                                //   } else if (selectedAddr1 == '인천시') {
-                                                //     addr2List = [
-                                                //       '연수구',
-                                                //       '남동구'
-                                                //     ]; // 인천시가 선택되었을 때의 내용
-                                                //   } else {
-                                                //     addr2List =
-                                                //         []; // 다른 지역이 선택되었을 때는 빈 리스트로 초기화
-                                                //   }
-                                                //   print(selectedAddr1);
-                                                // });
+                                              onSelected: (String? value) {
+                                                setState(() {
+                                                  addr2Controller.text = '';
+                                                  setAddr1();
+                                                });
                                               },
                                               dropdownMenuEntries: addr1List
                                                   .map<
@@ -917,23 +828,10 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
                                               //initialSelection: '',
                                               hintText: '구 선택',
                                               onSelected: (String? value) {
-                                                // setState(() {
-                                                //   selectedAddr2 = value ?? ''; // 선택된 값 업데이트
-
-                                                //   if (selectedAddr2 == '종로구') {
-                                                //     addr3List = ['경복궁역', '안국역'];
-                                                //   } else if (selectedAddr2 == '중랑구') {
-                                                //     addr3List = ['면목역', '중랑역'];
-                                                //   } else if (selectedAddr2 == '연수구') {
-                                                //     addr3List = ['테크노파크역', '연수역'];
-                                                //   } else if (selectedAddr2 == '남동구') {
-                                                //     addr3List = ['운연역', '만수역'];
-                                                //   } else {
-                                                //     addr3List =
-                                                //         []; // 다른 지역이 선택되었을 때는 빈 리스트로 초기화
-                                                //   }
-                                                //   print(selectedAddr2);
-                                                // });
+                                                setState(() {
+                                                  addr3Controller.text = '';
+                                                  setAddr2();
+                                                });
                                               },
                                               dropdownMenuEntries: addr2List
                                                   .map<
@@ -961,38 +859,10 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
                                               //initialSelection: '',
                                               hintText: '역 선택',
                                               onSelected: (String? value) {
-                                                // setState(() {
-                                                //   selectedAddr3 = value ?? ''; // 선택된 값 업데이트
-
-                                                //   if (selectedAddr3 == '경복궁역' ||
-                                                //       selectedAddr3 == '안국역') {
-                                                //     addr4List = ['1번출구', '2번출구'];
-                                                //   } else if (selectedAddr3 == '면목역' ||
-                                                //       selectedAddr3 == '중랑역') {
-                                                //     addr4List = ['1번출구', '2번출구', '3번출구'];
-                                                //   } else if (selectedAddr3 == '테크노파크역' ||
-                                                //       selectedAddr3 == '연수역') {
-                                                //     addr4List = [
-                                                //       '1번출구',
-                                                //       '2번출구',
-                                                //       '3번출구',
-                                                //       '4번출구'
-                                                //     ];
-                                                //   } else if (selectedAddr3 == '운연역' ||
-                                                //       selectedAddr3 == '만수역') {
-                                                //     addr4List = [
-                                                //       '1번출구',
-                                                //       '2번출구',
-                                                //       '3번출구',
-                                                //       '4번출구',
-                                                //       '5번출구'
-                                                //     ];
-                                                //   } else {
-                                                //     addr4List =
-                                                //         []; // 다른 지역이 선택되었을 때는 빈 리스트로 초기화
-                                                //   }
-                                                //   print(selectedAddr3);
-                                                // });
+                                                setState(() {
+                                                  addr4Controller.text = '';
+                                                  setAddr3();
+                                                });
                                               },
                                               dropdownMenuEntries: addr3List
                                                   .map<
@@ -1014,12 +884,7 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
                                               width: 120,
                                               //initialSelection: '',
                                               hintText: '출구 선택',
-                                              onSelected: (String? value) {
-                                                // setState(() {
-                                                //   selectedAddr4 = value ?? '';
-                                                //   print(selectedAddr4);
-                                                // });
-                                              },
+                                              onSelected: (String? value) {},
                                               dropdownMenuEntries: addr4List
                                                   .map<
                                                           DropdownMenuEntry<

@@ -1,3 +1,4 @@
+import 'package:aisl_carpool_front/Screens/CarpoolListScreen.dart';
 import 'package:aisl_carpool_front/Screens/MainScreen.dart';
 import 'package:aisl_carpool_front/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 // import 'package:firebase_options.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> _backgroundHandler(RemoteMessage message) async {}
 
@@ -34,23 +37,44 @@ void main() async {
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
+  const AndroidInitializationSettings androidInitSett =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: androidInitSett,
+  );
+
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+    onDidReceiveNotificationResponse:
+        (NotificationResponse notificationResponse) async {
+      navigatorKey.currentState!.push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => CarpoolListScreen(),
+        ),
+      );
+    },
+    //onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
+  );
+
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
 
     if (notification != null && android != null) {
       flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-              channel.id,
-              channel.name,
-              icon: '@mipmap/ic_launcher',
-              //icon: 'title_logo',
-            ),
-          ));
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel.id,
+            channel.name,
+            icon: '@mipmap/ic_launcher',
+            //icon: 'title_logo',
+          ),
+        ),
+      );
     }
   });
 
@@ -63,9 +87,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'YDRIVE',
-        debugShowCheckedModeBanner: false,
-        home: MainScreen(key: key, fcmToken: fcmToken)); //MaterialApp
+    return MediaQuery(
+        data:
+            MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
+        child: MaterialApp(
+            title: 'YDRIVE',
+            debugShowCheckedModeBanner: false,
+            home: MainScreen(key: key, fcmToken: fcmToken))); //MaterialApp
   }
 }

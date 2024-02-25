@@ -236,14 +236,14 @@ class _ReviewWriteScreen extends State<ReviewWriteScreen> {
                             ),
                             child: (DefaultTextStyle(
                                 style: TextStyle(
-                                    fontSize: 15, color: Color(0xFF000000)),
+                                    fontSize: 14, color: Color(0xFF000000)),
                                 child: Text('메인화면'))),
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        StartScreen()), (context) => false
-                              );
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          StartScreen()),
+                                  (context) => false);
                             },
                           ),
                         ),
@@ -257,7 +257,7 @@ class _ReviewWriteScreen extends State<ReviewWriteScreen> {
                             ),
                             child: (DefaultTextStyle(
                                 style: TextStyle(
-                                    fontSize: 15, color: Color(0xFF000000)),
+                                    fontSize: 14, color: Color(0xFF000000)),
                                 child: Text('작성하기'))),
                             onPressed: () {
                               reviewWrite(widget.carpoolNum, widget.waitNum,
@@ -305,9 +305,10 @@ class _ReviewWriteScreen extends State<ReviewWriteScreen> {
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => StartScreen()), (context) => false
-                        );
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    StartScreen()),
+                            (context) => false);
                       },
                       child: Text('확인'))
                 ]);

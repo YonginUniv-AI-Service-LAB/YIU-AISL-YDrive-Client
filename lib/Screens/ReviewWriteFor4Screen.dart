@@ -44,8 +44,8 @@ class _ReviewWriteFor4Screen extends State<ReviewWriteFor4Screen> {
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                        builder: (BuildContext context) => StartScreen()), (context) => false
-                );
+                        builder: (BuildContext context) => StartScreen()),
+                    (context) => false);
               },
               icon: Icon(
                 Icons.list,
@@ -75,9 +75,9 @@ class _ReviewWriteFor4Screen extends State<ReviewWriteFor4Screen> {
               IconButton(
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => MyPageScreen()), (context) => false
-                  );
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => MyPageScreen()),
+                      (context) => false);
                 },
                 icon: Icon(
                   Icons.person,
@@ -330,16 +330,16 @@ class _ReviewWriteFor4Screen extends State<ReviewWriteFor4Screen> {
                           ),
                           child: DefaultTextStyle(
                             style: TextStyle(
-                                fontSize: 15, color: Color(0xFF000000)),
+                                fontSize: 14, color: Color(0xFF000000)),
                             child: Text('메인화면'),
                           ),
                           onPressed: () {
                             Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    StartScreen(),
-                              ),  (context) => false
-                            );
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      StartScreen(),
+                                ),
+                                (context) => false);
                           },
                         ),
                       ),
@@ -423,10 +423,10 @@ class _ReviewWriteFor4Screen extends State<ReviewWriteFor4Screen> {
                 actions: <Widget>[
                   TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => StartScreen()),
-                        );
+                        // Navigator.of(context).pushReplacement(
+                        //   MaterialPageRoute(
+                        //       builder: (BuildContext context) => StartScreen()),
+                        // );
                       },
                       child: Text('확인'))
                 ]);

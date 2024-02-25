@@ -281,7 +281,7 @@ class _ModifydataScreenState extends State<ModifydataScreen> {
                     ),
                     child: DefaultTextStyle(
                         style:
-                            TextStyle(fontSize: 15, color: Color(0xFF000000)),
+                            TextStyle(fontSize: 14, color: Color(0xFF000000)),
                         child: Text('수정하기')),
                     onPressed: () {
                       profileUpdate(

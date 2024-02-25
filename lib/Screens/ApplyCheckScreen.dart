@@ -312,7 +312,7 @@ class _ApplyCheckScreen extends State<ApplyCheckScreen> {
                     ),
                     child: (DefaultTextStyle(
                         style:
-                            TextStyle(fontSize: 15, color: Color(0xFF000000)),
+                            TextStyle(fontSize: 14, color: Color(0xFF000000)),
                         child: Text('모집마감'))),
                     onPressed: () {
                       acceptFinish(widget.carpool.carpoolNum, context);

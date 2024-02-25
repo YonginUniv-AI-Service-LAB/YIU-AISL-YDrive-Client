@@ -81,9 +81,9 @@ class _CheckDetailWaitScreen extends State<CheckDetailWaitScreen> {
               Padding(
                 padding: EdgeInsets.only(bottom: 10, top: 30),
                 child: Container(
-                    height: 150,
+                    height: 160,
                     width: 400,
-                    padding: EdgeInsets.all(50),
+                    padding: EdgeInsets.only(top: 50, left: 50, right: 50),
                     decoration: BoxDecoration(
                         border: Border.all(
                           color: Color(0xFF9EA1CA),
@@ -113,7 +113,7 @@ class _CheckDetailWaitScreen extends State<CheckDetailWaitScreen> {
                     ),
                     child: (DefaultTextStyle(
                         style:
-                            TextStyle(fontSize: 15, color: Color(0xFF000000)),
+                            TextStyle(fontSize: 14, color: Color(0xFF000000)),
                         child: Text('카풀시작'))),
                     onPressed: () {
                       Navigator.of(context).pushReplacement(

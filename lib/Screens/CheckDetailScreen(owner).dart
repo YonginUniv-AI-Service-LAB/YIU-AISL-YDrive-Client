@@ -708,7 +708,7 @@ class _CheckDetailScreen_owner extends State<CheckDetailScreen_owner> {
                           ),
                           child: (DefaultTextStyle(
                               style: TextStyle(
-                                  fontSize: 15, color: Color(0xFF000000)),
+                                  fontSize: 14, color: Color(0xFF000000)),
                               child: Text('거절하기'))),
                           onPressed: () {
                             deny(widget.waitNum, widget.carpoolNum, context);
@@ -725,7 +725,7 @@ class _CheckDetailScreen_owner extends State<CheckDetailScreen_owner> {
                           ),
                           child: (DefaultTextStyle(
                               style: TextStyle(
-                                  fontSize: 15, color: Color(0xFF000000)),
+                                  fontSize: 13, color: Color(0xFF000000)),
                               child: Text('수락하기'))),
                           onPressed: () {
                             accept(widget.waitNum, widget.carpoolNum, context);
