@@ -553,7 +553,10 @@ class _MyPageScreenState extends State<MyPageScreen> {
                 TextButton(
                   child: Text('확인'),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => StartScreen()),
+                        (context) => false);
                   },
                 ),
               ],

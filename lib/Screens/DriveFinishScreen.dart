@@ -342,11 +342,13 @@ class _DrivefinishScreen extends State<DrivefinishScreen> {
                 child: Text('확인'),
                 onPressed: () {
                   if (widget.carpool.email == userEmail) {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              ReviewWriteFor4Screen(carpool: widget.carpool)),
-                    );
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                ReviewWriteFor4Screen(
+                                  carpool: widget.carpool,
+                                )),
+                        (context) => false);
                   } else {
                     // Navigator.of(context).pushReplacement(
                     //   MaterialPageRoute(

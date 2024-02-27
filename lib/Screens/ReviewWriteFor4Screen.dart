@@ -423,10 +423,7 @@ class _ReviewWriteFor4Screen extends State<ReviewWriteFor4Screen> {
                 actions: <Widget>[
                   TextButton(
                       onPressed: () {
-                        // Navigator.of(context).pushReplacement(
-                        //   MaterialPageRoute(
-                        //       builder: (BuildContext context) => StartScreen()),
-                        // );
+                        Navigator.of(context).pop();
                       },
                       child: Text('확인'))
                 ]);

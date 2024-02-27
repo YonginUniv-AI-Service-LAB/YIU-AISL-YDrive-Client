@@ -960,18 +960,34 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
                                 fontSize: 14, color: Color(0xFF000000)),
                             child: Text('작성하기')),
                         onPressed: () {
-                          carpool(
-                            addr1Controller.text,
-                            addr2Controller.text,
-                            addr3Controller.text,
-                            addr4Controller.text,
-                            monthController.text,
-                            dayController.text,
-                            hourController.text,
-                            minuteController.text,
-                            selectedAddr,
-                            numberController.text,
-                          );
+                          if (selectedButton == '등교') {
+                            carpool1(
+                              addr1Controller.text,
+                              addr2Controller.text,
+                              addr3Controller.text,
+                              addr4Controller.text,
+                              monthController.text,
+                              dayController.text,
+                              hourController.text,
+                              minuteController.text,
+                              selectedAddr,
+                              numberController.text,
+                            );
+                          } else {
+                            carpool2(
+                              addr1Controller.text,
+                              addr2Controller.text,
+                              addr3Controller.text,
+                              addr4Controller.text,
+                              monthController.text,
+                              dayController.text,
+                              hourController.text,
+                              minuteController.text,
+                              selectedAddr,
+                              numberController.text,
+                            );
+                          }
+
                           // Navigator.of(context).pop(
                           //   MaterialPageRoute(
                           //       builder: (BuildContext context) => StartScreen()),
@@ -989,7 +1005,7 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
     );
   }
 
-  void carpool(
+  void carpool1(
       String addr1,
       String addr2,
       String addr3,
@@ -1034,6 +1050,94 @@ class _CarpoolScreenState extends State<CarpoolScreen> {
         body: jsonEncode(<String, dynamic>{
           'start': "${addr1} ${addr2} ${addr3} ${addr4} 출구",
           'end': fixAddr,
+          'date': "2024-${month}-${day}T${hour}:${minute}",
+          'memberNum': num,
+          'checkNum': "0"
+        }),
+      );
+      if (response.statusCode == 200) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                  title: Text('게시물 생성 완료'),
+                  content: Text('게시물 생성이 완료되었습니다.'),
+                  actions: <Widget>[
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      StartScreen()),
+                              (route) => false);
+                        },
+                        child: Text('확인'))
+                  ]);
+            });
+      } else {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                  title: Text('게시물 생성 실패'),
+                  content: Text('게시물 생성에 실패하셨습니다.'),
+                  actions: <Widget>[
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('확인'))
+                  ]);
+            });
+      }
+    }
+  }
+
+  void carpool2(
+      String addr1,
+      String addr2,
+      String addr3,
+      String addr4,
+      String month,
+      String day,
+      String hour,
+      String minute,
+      String fixAddr,
+      String num) async {
+    print(
+        "확인 ${addr1}, ${addr2}, ${addr3}, ${addr4}, ${month}, ${day}, ${hour}, ${minute}, ${fixAddr}, ${num} ");
+    setState(() {
+      _addr1Validate = addr1.isEmpty;
+      _addr2Validate = addr2.isEmpty;
+      _addr3Validate = addr3.isEmpty;
+      _addr4Validate = addr4.isEmpty;
+      _monthValidate = month.isEmpty;
+      _dayValidate = day.isEmpty;
+      _hourValidate = hour.isEmpty;
+      _minuteValidate = minute.isEmpty;
+      _numberValidate = num.isEmpty;
+    });
+
+    if (!_addr1Validate &&
+        !_addr2Validate &&
+        !_addr3Validate &&
+        !_addr4Validate &&
+        !_monthValidate &&
+        !_dayValidate &&
+        !_hourValidate &&
+        !_minuteValidate &&
+        !_numberValidate) {
+      var token = await getToken();
+      var url = Uri.parse("${dotenv.env['API_URL']}:8080/carpool/create");
+      var response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'start': fixAddr,
+          'end': "${addr1} ${addr2} ${addr3} ${addr4} 출구",
           'date': "2024-${month}-${day}T${hour}:${minute}",
           'memberNum': num,
           'checkNum': "0"
