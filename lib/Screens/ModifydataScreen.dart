@@ -55,6 +55,7 @@ class _ModifydataScreenState extends State<ModifydataScreen> {
   void initState() {
     super.initState();
     fetchProfile();
+    setAddr1();
   }
 
   @override
@@ -173,26 +174,6 @@ class _ModifydataScreenState extends State<ModifydataScreen> {
                                   home2Controller.text = '';
                                   setAddr1();
                                 });
-                                // setState(() {
-                                //   selectedAddr1 = value ?? ''; // 선택된 값 업데이트
-
-                                //   // 두 번째 Dropdown의 내용을 갱신하거나 변경하는 로직 추가
-                                //   if (selectedAddr1 == '서울시') {
-                                //     addr2List = [
-                                //       '종로구',
-                                //       '중랑구'
-                                //     ]; // 서울시가 선택되었을 때의 내용
-                                //   } else if (selectedAddr1 == '인천시') {
-                                //     addr2List = [
-                                //       '연수구',
-                                //       '남동구'
-                                //     ]; // 인천시가 선택되었을 때의 내용
-                                //   } else {
-                                //     addr2List =
-                                //         []; // 다른 지역이 선택되었을 때는 빈 리스트로 초기화
-                                //   }
-                                //   print(selectedAddr1);
-                                // });
                               },
                               dropdownMenuEntries: addr1List
                                   .map<DropdownMenuEntry<String>>(
@@ -211,25 +192,7 @@ class _ModifydataScreenState extends State<ModifydataScreen> {
                               width: 120,
                               //initialSelection: '',
                               hintText: '구 선택',
-                              onSelected: (String? value) {
-                                // setState(() {
-                                //   selectedAddr2 = value ?? ''; // 선택된 값 업데이트
-
-                                //   if (selectedAddr2 == '종로구') {
-                                //     addr3List = ['경복궁역', '안국역'];
-                                //   } else if (selectedAddr2 == '중랑구') {
-                                //     addr3List = ['면목역', '중랑역'];
-                                //   } else if (selectedAddr2 == '연수구') {
-                                //     addr3List = ['테크노파크역', '연수역'];
-                                //   } else if (selectedAddr2 == '남동구') {
-                                //     addr3List = ['운연역', '만수역'];
-                                //   } else {
-                                //     addr3List =
-                                //         []; // 다른 지역이 선택되었을 때는 빈 리스트로 초기화
-                                //   }
-                                //   print(selectedAddr2);
-                                // });
-                              },
+                              onSelected: (String? value) {},
                               dropdownMenuEntries: addr2List
                                   .map<DropdownMenuEntry<String>>(
                                       (String value) {

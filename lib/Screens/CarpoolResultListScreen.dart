@@ -128,7 +128,7 @@ class _CarpoolResultListScreenState extends State<CarpoolResultListScreen> {
                                 }
                               },
                               child: Container(
-                                height: 200,
+                                height: 220,
                                 padding: EdgeInsets.only(
                                     bottom: 25, left: 15, right: 15),
                                 decoration: BoxDecoration(

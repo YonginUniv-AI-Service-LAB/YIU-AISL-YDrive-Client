@@ -1,5 +1,11 @@
 import 'package:aisl_carpool_front/Screens/CarpoolListScreen.dart';
+import 'package:aisl_carpool_front/Screens/CarpoolResultListScreen.dart';
+import 'package:aisl_carpool_front/Screens/CarpoolScreen.dart';
+import 'package:aisl_carpool_front/Screens/DriveFinishScreen.dart';
+import 'package:aisl_carpool_front/Screens/LoginScreen.dart';
 import 'package:aisl_carpool_front/Screens/MainScreen.dart';
+import 'package:aisl_carpool_front/Screens/ModifydataScreen.dart';
+import 'package:aisl_carpool_front/Screens/MyPageScreen.dart';
 import 'package:aisl_carpool_front/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -37,25 +43,42 @@ void main() async {
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
-  const AndroidInitializationSettings androidInitSett =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
-
-  final InitializationSettings initializationSettings = InitializationSettings(
-    android: androidInitSett,
-  );
-
   await flutterLocalNotificationsPlugin.initialize(
-    initializationSettings,
-    onDidReceiveNotificationResponse:
-        (NotificationResponse notificationResponse) async {
+      const InitializationSettings(
+          android: AndroidInitializationSettings('@mipmap/ic_launcher')),
+      onDidReceiveNotificationResponse: (details) {
+    print("내용 확인 ${details.payload}");
+    if (details.payload == '🚗 카풀 요청') {
       navigatorKey.currentState!.push(
         MaterialPageRoute(
           builder: (BuildContext context) => CarpoolListScreen(),
         ),
       );
-    },
-    //onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
-  );
+    } else {
+      navigatorKey.currentState!.push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => CarpoolResultListScreen(),
+        ),
+      );
+    }
+  });
+  // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+  //   print('A new onMessageOpenedApp event was published!');
+  //   print("메세지 타이틀 확인 : ${message.notification?.title}");
+  //   if (message.notification?.title == '🚗 카풀 요청') {
+  //     navigatorKey.currentState!.push(
+  //       MaterialPageRoute(
+  //         builder: (BuildContext context) => CarpoolScreen(),
+  //       ),
+  //     );
+  //   } else {
+  //     navigatorKey.currentState!.push(
+  //       MaterialPageRoute(
+  //         builder: (BuildContext context) => ModifydataScreen(),
+  //       ),
+  //     );
+  //   }
+  // });
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     RemoteNotification? notification = message.notification;
@@ -63,18 +86,19 @@ void main() async {
 
     if (notification != null && android != null) {
       flutterLocalNotificationsPlugin.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            channel.id,
-            channel.name,
-            icon: '@mipmap/ic_launcher',
-            //icon: 'title_logo',
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              icon: '@mipmap/ic_launcher',
+
+              //icon: 'title_logo',
+            ),
           ),
-        ),
-      );
+          payload: notification.title);
     }
   });
 
@@ -91,6 +115,7 @@ class MyApp extends StatelessWidget {
         data:
             MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
         child: MaterialApp(
+            navigatorKey: navigatorKey,
             title: 'YDRIVE',
             debugShowCheckedModeBanner: false,
             home: MainScreen(key: key, fcmToken: fcmToken))); //MaterialApp
