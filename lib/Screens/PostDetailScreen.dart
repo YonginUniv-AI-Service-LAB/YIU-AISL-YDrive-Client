@@ -27,7 +27,7 @@ class _PostDetailScreen extends State<PostDetailScreen> {
   @override
   void initState() {
     super.initState();
-    futureReviewData = fetchOwnerReview(widget.carpool.carpoolNum);
+    futureReviewData = fetchOwnerReview(widget.carpool.email);
   }
 
   @override
@@ -412,12 +412,13 @@ class _PostDetailScreen extends State<PostDetailScreen> {
     }
   }
 
-  Future<List<Review>> fetchOwnerReview(int carpoolNum) async {
+  Future<List<Review>> fetchOwnerReview(String email) async {
     try {
       var token = await getToken();
       final response = await http.get(
         Uri.parse(
-            "${dotenv.env['API_URL']}:8080/list/review/owner/${carpoolNum}"),
+            "${dotenv.env['API_URL']}:8080/list/review/owner/${email}"),
+
         headers: <String, String>{
           'Authorization': 'Bearer $token',
         },

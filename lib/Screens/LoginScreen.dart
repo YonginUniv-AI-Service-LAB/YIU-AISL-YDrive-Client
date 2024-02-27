@@ -216,7 +216,7 @@ class LoginScreen extends StatelessWidget {
     if (response.statusCode == 200) {
       Map<String, dynamic> body = jsonDecode(response.body);
       Map<String, dynamic> tokenInfo = body['token'];
-      String token = tokenInfo['access_token'];
+      String token = tokenInfo['accessToken'];
       setToken(token);
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => StartScreen()),
